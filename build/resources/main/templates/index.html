@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Exercise #</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <meta charset="utf-8" />
+</head>
+<body>
+<h1>Test Index Page</h1>
+
+<ul th:each="findall: ${findall}">
+
+    <li th:text="${findall.getItemType()}"/>
+    <span th:text="${findall.getValueOfItem()}"></span>
+
+</ul>
+
+</body>
+</html>
