@@ -1,6 +1,7 @@
-/*
 package com.example.housKeeping.config;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,22 +17,26 @@ public class StartupConfig implements ApplicationListener<ApplicationReadyEvent>
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         try {
-            try (Connection connection = DriverManager.getConnection(getHostName())) {
-                try (Statement statement = connection.createStatement()) {
-                    int result = statement.executeUpdate("CREATE DATABASE house");
-                }
+            Connection connection = getConnection();
+            try (Statement statement = connection.createStatement()) {
+                statement.executeUpdate("CREATE DATABASE house");
             }
-
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public String getHostName() {
-        String jdbc_database_url = System.getenv("JDBC_DATABASE_URL");
-        String jdbc_database_username = System.getenv("JDBC_DATABASE_USERNAME");
-        String jdbc_database_password = System.getenv("JDBC_DATABASE_PASSWORD");
-        return jdbc_database_url + "?user=" + jdbc_database_username + "&password=" + jdbc_database_password;
+    private static Connection getConnection() throws URISyntaxException, SQLException {
+        URI jdbUri = new URI(System.getenv("JAWSDB_URL"));
+
+        String username = jdbUri.getUserInfo().split(":")[0];
+        String password = jdbUri.getUserInfo().split(":")[1];
+        String port = String.valueOf(jdbUri.getPort());
+        String jdbUrl = "jdbc:mysql://" + jdbUri.getHost() + ":" + port + jdbUri.getPath();
+
+        return DriverManager.getConnection(jdbUrl, username, password);
     }
+
 }
-*/
