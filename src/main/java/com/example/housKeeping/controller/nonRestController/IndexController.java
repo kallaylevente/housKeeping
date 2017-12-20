@@ -29,4 +29,9 @@ public class IndexController {
         model.addAttribute("findall", houseKeepingItemRepository.findAll());
         return "index";
     }
+
+    @RequestMapping("")
+    public String healthCheck(Model model) {
+        return "health";
+    }
 }
