@@ -1,3 +1,4 @@
+/*
 package com.example.housKeeping.config;
 
 import java.sql.Connection;
@@ -33,3 +34,4 @@ public class StartupConfig implements ApplicationListener<ApplicationReadyEvent>
         return jdbc_database_url + "?user=" + jdbc_database_username + "&password=" + jdbc_database_password;
     }
 }
+*/
