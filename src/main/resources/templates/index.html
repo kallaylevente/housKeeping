@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thymeleaf Exercise #</title>
+    <title>Housekeep #</title>
     <link rel="stylesheet" th:href="@{/style.css}" />
     <meta charset="utf-8" />
 </head>
@@ -14,6 +14,13 @@
     <span th:text="${findall.getValueOfItem()}"></span>
 
 </ul>
+
+<form th:action="@{/housekeeping/addItem}" method="post">
+    <input type="text" th:name="itemGroup" placeholder="group of item"> </input>
+    <input type="text" th:name="itemType" placeholder="type of item"> </input>
+    <input type="text" th:name="itemValue" placeholder="group of item"> </input>
+    <button type="submit">send</button>
+</form>
 
 </body>
 </html>

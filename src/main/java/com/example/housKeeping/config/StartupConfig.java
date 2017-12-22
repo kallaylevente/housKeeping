@@ -1,3 +1,4 @@
+/*
 package com.example.housKeeping.config;
 
 import java.net.URI;
@@ -40,3 +41,4 @@ public class StartupConfig implements ApplicationListener<ApplicationReadyEvent>
     }
 
 }
+*/
