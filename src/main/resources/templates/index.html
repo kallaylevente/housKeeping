@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
     <title>Housekeep #</title>
     <link rel="stylesheet" th:href="@{/style.css}" />
     <meta charset="utf-8" />
 </head>
 <body>
-<h1>Test Index Page</h1>
-
-<ul th:each="findall: ${findall}">
-
-    <li th:text="${findall.getItemType()}"/>
-    <span th:text="${findall.getValueOfItem()}"></span>
-
-</ul>
 
 <form th:action="@{/housekeeping/addItem}" method="post">
-    <input type="text" th:name="itemGroup" placeholder="group of item"> </input>
-    <input type="text" th:name="itemType" placeholder="type of item"> </input>
-    <input type="text" th:name="itemValue" placeholder="group of item"> </input>
+    <select type="text" th:name="itemGroup" placeholder="group of item" required="required">
+        <option value="rezsi">Rezsi</option>
+        <option value="household">Household</option>
+        <option value="shopping">Shopping</option>
+        <option value="habzsi">Habzsi</option>
+    </select>
+    <input type="text" th:name="itemType" placeholder="type of item" required="required"> </input>
+    <input type="text" th:name="itemValue" placeholder="value of item" required="required"> </input>
     <button type="submit">send</button>
 </form>
+
+<a href="housekeeping/sum.html">Check out the current balance</a>
+
 
 </body>
 </html>

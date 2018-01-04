@@ -1,3 +1,4 @@
+/*
 package com.example.housKeeping.controller;
 
 import java.util.Optional;
@@ -38,3 +39,4 @@ public class HouseKeepingControllerAdvice {
                 .orElseThrow(() -> new RuntimeException("ResponseStatus annotation should be added to exception class.", e));
     }
 }
+*/

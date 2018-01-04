@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Housekeep #</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <meta charset="utf-8"/>
+</head>
+<body>
+
+<div class="row">
+<div class="col-md-6">
+ <table class="table table-striped">
+     <tr >
+         <th>Rezsi</th>
+         <th>HouseHolding</th>
+         <th>Shopping</th>
+         <th>Habzsi</th>
+         <th>Total</th>
+     </tr>
+     <tr >
+         <td th:text="${sum.get('Rezsi')}"></td>
+         <td th:text="${sum.get('Household')}"></td>
+         <td th:text="${sum.get('Shopping')}"></td>
+         <td th:text="${sum.get('Habzsi')}"></td>
+         <td th:text="${allsum}" class="label label-danger"></td>
+     </tr>
+ </table>
+</div>
+</div>
+
+<p>
+    <button type="button" class="btn btn-lg btn success"> <a href="/housekeeping">Get back to main page</a> </button>
+</p>
+
+ <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+ <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>
