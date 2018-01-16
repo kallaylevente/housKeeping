@@ -3,17 +3,17 @@ package com.example.housKeeping.service;
 import java.util.List;
 
 
-import com.example.housKeeping.domain.HouseKeepingItem;
-import com.example.housKeeping.domain.HouseKeepingItemDto;
+import com.example.housKeeping.domain.SpendingItem;
+import com.example.housKeeping.domain.SpendingItemDto;
 
 public interface ItemHandling {
-     HouseKeepingItem createItem(HouseKeepingItemDto dto);
+     SpendingItem createItem(SpendingItemDto dto);
 
-     HouseKeepingItem readItemById(String houseKeepingItemId);
+     SpendingItem readItemById(String houseKeepingItemId);
 
-     List<HouseKeepingItem> readItems(String filterParam);
+     List<SpendingItem> readItems(String filterParam);
 
-     HouseKeepingItem updateItem(String houseKeepingItemId, HouseKeepingItemDto dto);
+     SpendingItem updateItem(String houseKeepingItemId, SpendingItemDto dto);
 
-     HouseKeepingItem deleteItem(String houseKeepingItemId);
+     SpendingItem deleteItem(String houseKeepingItemId);
 }

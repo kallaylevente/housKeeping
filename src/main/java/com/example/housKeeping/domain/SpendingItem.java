@@ -1,5 +1,7 @@
 package com.example.housKeeping.domain;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,37 +9,23 @@ import javax.persistence.Id;
 
 
 import lombok.Builder;
-import lombok.Getter;
 import lombok.experimental.Tolerate;
 
 @Builder
 @Entity
-public class HouseKeepingItem {
+public class SpendingItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
 
-    public String itemGroup;
+    private String itemGroup;
     public String itemType;
     public Integer valueOfItem;
+    private Timestamp timestamp;
+
 
     @Tolerate
-    public HouseKeepingItem() {
+    public SpendingItem() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getItemGroup() {
-        return itemGroup;
-    }
-
-    public String getItemType() {
-        return itemType;
-    }
-
-    public Integer getValueOfItem() {
-        return valueOfItem;
-    }
 }

@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.support.ConfigurableConversionService;
 
-import com.example.housKeeping.converter.HouseKeepingItemDtoToHouseKeepingItemConverter;
+import com.example.housKeeping.converter.IncomeItemDtoToIncomeItemConverter;
+import com.example.housKeeping.converter.SpendingItemDtoToSpendingItemConverter;
 
 @Configuration
 public class ConverterConfig {
@@ -16,6 +17,7 @@ public class ConverterConfig {
 
     @PostConstruct
     public void initializeConversionService() {
-        mvcConversionService.addConverter(new HouseKeepingItemDtoToHouseKeepingItemConverter());
+        mvcConversionService.addConverter(new SpendingItemDtoToSpendingItemConverter());
+        mvcConversionService.addConverter(new IncomeItemDtoToIncomeItemConverter());
     }
 }

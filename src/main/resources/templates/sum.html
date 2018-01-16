@@ -13,22 +13,52 @@
 <div class="col-md-6">
  <table class="table table-striped">
      <tr >
-         <th>Rezsi</th>
-         <th>HouseHolding</th>
-         <th>Shopping</th>
-         <th>Habzsi</th>
+         <th><a href="detailedSpendings/rezsi">Rezsi</a></th>
+         <th><a href="detailedSpendings/householding">HouseHolding</a></th>
+         <th><a href="detailedSpendings/shopping">Shopping</a></th>
+         <th><a href="detailedSpendings/fun">Fun</a></th>
          <th>Total</th>
      </tr>
      <tr >
          <td th:text="${sum.get('Rezsi')}"></td>
          <td th:text="${sum.get('Household')}"></td>
          <td th:text="${sum.get('Shopping')}"></td>
-         <td th:text="${sum.get('Habzsi')}"></td>
+         <td th:text="${sum.get('Fun')}"></td>
          <td th:text="${allsum}" class="label label-danger"></td>
      </tr>
  </table>
 </div>
 </div>
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <tr >
+                <th>Income</th>
+            </tr>
+            <tr >
+                <td th:text="${income}" class="label label-success"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <tr >
+                <th>Balance</th>
+            </tr>
+            <tr >
+                <td th:text="${income - allsum}" class=" label label-info" ></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
 
 <p>
     <button type="button" class="btn btn-lg btn success"> <a href="/housekeeping">Get back to main page</a> </button>

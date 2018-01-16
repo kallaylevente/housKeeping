@@ -1,25 +1,40 @@
 package com.example.housKeeping.controller.controller;
 
 
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.housKeeping.domain.HouseKeepingItem;
-import com.example.housKeeping.domain.HouseKeepingItemDto;
-import com.example.housKeeping.persistance.HouseKeepingItemRepository;
+import com.example.housKeeping.domain.IncomeItem;
+import com.example.housKeeping.domain.IncomeItemDto;
+import com.example.housKeeping.domain.SpendingItem;
+import com.example.housKeeping.domain.SpendingItemDto;
+import com.example.housKeeping.persistance.IncomesRepository;
+import com.example.housKeeping.persistance.SpendingsRepository;
 import com.example.housKeeping.service.DatabaseManagement;
+import static java.util.Optional.*;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class MainController {
 
-    private final HouseKeepingItemRepository houseKeepingItemRepository;
+    private final SpendingsRepository spendingsRepository;
+
+    private final IncomesRepository incomesRepository;
 
     private final DatabaseManagement databaseManagement;
 
@@ -28,30 +43,50 @@ public class MainController {
 
     @RequestMapping("/housekeeping")
     public String getIndexPage(Model model) {
-        model.addAttribute("findall", houseKeepingItemRepository.findAll());
+        model.addAttribute("findall", spendingsRepository.findAll());
         return "index";
     }
-
+@Transactional
     @RequestMapping("/housekeeping/sum")
     public String getSum(Model model) {
-        model.addAttribute("findall", houseKeepingItemRepository.sumOfValueByGroup("Rezsi"));
+        model.addAttribute("income", ofNullable(incomesRepository.getSumOfIncomes()).orElse(0));
+        model.addAttribute("findall", spendingsRepository.sumOfValueByGroup("Rezsi"));
         model.addAttribute("sum", databaseManagement.getSums());
-        model.addAttribute("allsum", databaseManagement.getSumOfAll());
+        model.addAttribute("allsum", ofNullable(databaseManagement.getSumOfAll()).orElse(0));
         return "sum";
     }
 
-    @RequestMapping(value = "/housekeeping/addItem", method = RequestMethod.POST)
-    public String addNewItem(Model model,
-                             @RequestParam("itemGroup") String itemGroup,
-                             @RequestParam("itemType") String itemType,
-                             @RequestParam("itemValue") String itemValue) {
-        houseKeepingItemRepository.save(converter.convert(HouseKeepingItemDto.builder()
+    @RequestMapping(value = "/housekeeping/addSpending", method = RequestMethod.POST)
+    public String addNewSpending(Model model,
+                                 @RequestParam("itemGroup") String itemGroup,
+                                 @RequestParam("itemType") String itemType,
+                                 @RequestParam("itemValue") String itemValue) {
+        spendingsRepository.save(converter.convert(SpendingItemDto.builder()
                         .itemGroup(itemGroup)
                         .itemType(itemType)
+                        .timestamp(new Timestamp(System.currentTimeMillis()))
                         .valueOfItem(Integer.valueOf(itemValue))
                         .build()
-                , HouseKeepingItem.class));
+                , SpendingItem.class));
         return "redirect:/housekeeping";
+    }
+
+    @RequestMapping(value = "/housekeeping/addIncome", method = RequestMethod.POST)
+    public String addNewIncome(Model model,
+                               @RequestParam("type") String incomingtype,
+                               @RequestParam("value") Integer incomingValue) {
+        incomesRepository.save(converter.convert(IncomeItemDto.builder()
+                .type(incomingtype)
+                .valueOfIncome(incomingValue)
+                .timestamp(new Timestamp(System.currentTimeMillis()))
+                .build(), IncomeItem.class));
+        return "redirect:/housekeeping";
+    }
+
+    @RequestMapping(value = "/housekeeping/detailedSpendings/{group}", method = RequestMethod.GET)
+    public String getDetailedSpendings(Model model, @PathVariable String group) {
+        model.addAttribute("list", spendingsRepository.findByItemGroup(group));
+        return "detailed";
     }
 
     @RequestMapping("")

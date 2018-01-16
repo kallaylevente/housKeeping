@@ -5,34 +5,34 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.housKeeping.domain.HouseKeepingItem;
-import com.example.housKeeping.domain.HouseKeepingItemDto;
+import com.example.housKeeping.domain.SpendingItem;
+import com.example.housKeeping.domain.SpendingItemDto;
 
 @Service
 public class ItemHandlingImpl implements ItemHandling {
 
     @Override
-    public HouseKeepingItem createItem(HouseKeepingItemDto dto) {
+    public SpendingItem createItem(SpendingItemDto dto) {
         return null;
     }
 
     @Override
-    public HouseKeepingItem readItemById(String houseKeepingItemId) {
+    public SpendingItem readItemById(String houseKeepingItemId) {
         return null;
     }
 
     @Override
-    public List<HouseKeepingItem> readItems(String filterParam) {
+    public List<SpendingItem> readItems(String filterParam) {
         return null;
     }
 
     @Override
-    public HouseKeepingItem updateItem(String houseKeepingItemId, HouseKeepingItemDto dto) {
+    public SpendingItem updateItem(String houseKeepingItemId, SpendingItemDto dto) {
         return null;
     }
 
     @Override
-    public HouseKeepingItem deleteItem(String houseKeepingItemId) {
+    public SpendingItem deleteItem(String houseKeepingItemId) {
         return null;
     }
 }

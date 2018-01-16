@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.housKeeping.persistance.HouseKeepingItemRepository;
+import com.example.housKeeping.persistance.SpendingsRepository;
 import static java.util.Optional.ofNullable;
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class DatabaseManagement {
 
-    private final HouseKeepingItemRepository houseKeepingItemRepository;
+    private final SpendingsRepository spendingsRepository;
 
     public Map<String, Integer> getSums() {
         return createSumHashMap();
@@ -27,10 +27,10 @@ public class DatabaseManagement {
 
     private Map<String, Integer> createSumHashMap() {
         Map<String, Integer> sumMap = new HashMap<>();
-        sumMap.put("Rezsi", ofNullable(houseKeepingItemRepository.sumOfValueByGroup("Rezsi")).orElse(0));
-        sumMap.put("Household", ofNullable(houseKeepingItemRepository.sumOfValueByGroup("Household")).orElse(0));
-        sumMap.put("Shopping", ofNullable(houseKeepingItemRepository.sumOfValueByGroup("Shopping")).orElse(0));
-        sumMap.put("Habzsi", ofNullable(houseKeepingItemRepository.sumOfValueByGroup("Habzsi")).orElse(0));
+        sumMap.put("Rezsi", ofNullable(spendingsRepository.sumOfValueByGroup("Rezsi")).orElse(0));
+        sumMap.put("Household", ofNullable(spendingsRepository.sumOfValueByGroup("Household")).orElse(0));
+        sumMap.put("Shopping", ofNullable(spendingsRepository.sumOfValueByGroup("Shopping")).orElse(0));
+        sumMap.put("Fun", ofNullable(spendingsRepository.sumOfValueByGroup("Fun")).orElse(0));
         return sumMap;
     }
 }

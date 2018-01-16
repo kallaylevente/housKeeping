@@ -1,17 +1,22 @@
 package com.example.housKeeping.persistance;
 
+import java.util.List;
+
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.housKeeping.domain.HouseKeepingItem;
+import com.example.housKeeping.domain.SpendingItem;
 
 @Repository
-public interface HouseKeepingItemRepository extends JpaRepository<HouseKeepingItem, Long> {
-    HouseKeepingItem findById(Long aLong);
+public interface SpendingsRepository extends JpaRepository<SpendingItem, Long> {
+    SpendingItem findById(Long aLong);
 
-    HouseKeepingItem findByItemType(String name);
+    SpendingItem findByItemType(String name);
 
-    @Query(value = "SELECT SUM(value_of_item) FROM house_keeping_item WHERE item_group = ?1", nativeQuery = true)
+    List<SpendingItem> findByItemGroup(String group);
+
+    @Query(value = "SELECT SUM(value_of_item) FROM spending_item WHERE item_group = ?1", nativeQuery = true)
     Integer sumOfValueByGroup(String group);
 }
