@@ -1,12 +1,11 @@
 package com.example.housKeeping.controller.controller;
 
 
-import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import static java.util.Optional.ofNullable;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -25,7 +24,6 @@ import com.example.housKeeping.domain.SpendingItemDto;
 import com.example.housKeeping.persistance.IncomesRepository;
 import com.example.housKeeping.persistance.SpendingsRepository;
 import com.example.housKeeping.service.DatabaseManagement;
-import static java.util.Optional.*;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -41,7 +39,7 @@ public class MainController {
     private final ConversionService converter;
 
 
-    @RequestMapping("/housekeeping")
+    @RequestMapping(value = {"/housekeeping", "*.ded"})
     public String getIndexPage(Model model) {
         model.addAttribute("findall", spendingsRepository.findAll());
         return "index";
@@ -68,6 +66,8 @@ public class MainController {
                         .valueOfItem(Integer.valueOf(itemValue))
                         .build()
                 , SpendingItem.class));
+        List alist = new ArrayList();
+        alist.iterator();
         return "redirect:/housekeeping";
     }
 
