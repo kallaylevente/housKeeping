@@ -48,7 +48,7 @@ public class MainController {
     @RequestMapping("/housekeeping/sum")
     public String getSum(Model model) {
         model.addAttribute("income", ofNullable(incomesRepository.getSumOfIncomes()).orElse(0));
-        model.addAttribute("findall", spendingsRepository.sumOfValueByGroup("Rezsi"));
+        model.addAttribute("findall", spendingsRepository.sumOfValueByGroup("rezsi"));
         model.addAttribute("sum", databaseManagement.getSums());
         model.addAttribute("allsum", ofNullable(databaseManagement.getSumOfAll()).orElse(0));
         return "sum";

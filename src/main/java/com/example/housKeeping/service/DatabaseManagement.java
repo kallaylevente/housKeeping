@@ -27,10 +27,10 @@ public class DatabaseManagement {
 
     private Map<String, Integer> createSumHashMap() {
         Map<String, Integer> sumMap = new HashMap<>();
-        sumMap.put("Rezsi", ofNullable(spendingsRepository.sumOfValueByGroup("Rezsi")).orElse(0));
-        sumMap.put("Household", ofNullable(spendingsRepository.sumOfValueByGroup("Household")).orElse(0));
-        sumMap.put("Shopping", ofNullable(spendingsRepository.sumOfValueByGroup("Shopping")).orElse(0));
-        sumMap.put("Fun", ofNullable(spendingsRepository.sumOfValueByGroup("Fun")).orElse(0));
+        sumMap.put("rezsi", ofNullable(spendingsRepository.sumOfValueByGroup("rezsi")).orElse(0));
+        sumMap.put("household", ofNullable(spendingsRepository.sumOfValueByGroup("household")).orElse(0));
+        sumMap.put("shopping", ofNullable(spendingsRepository.sumOfValueByGroup("shopping")).orElse(0));
+        sumMap.put("fun", ofNullable(spendingsRepository.sumOfValueByGroup("fun")).orElse(0));
         return sumMap;
     }
 }
