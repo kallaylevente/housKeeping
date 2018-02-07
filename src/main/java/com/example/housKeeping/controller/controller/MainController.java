@@ -8,6 +8,7 @@ import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -48,6 +49,7 @@ public class MainController {
         return "index";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     @RequestMapping("/housekeeping/sum")
     public String getSum(Model model) {
@@ -77,7 +79,7 @@ public class MainController {
     public String addNewIncome(Model model,
                                @RequestParam("type") String incomingtype,
                                @RequestParam("value") Integer incomingValue) {
-        IncomeItem save = incomesRepository.save(converter.convert(IncomeItemDto.builder()
+       incomesRepository.save(converter.convert(IncomeItemDto.builder()
                 .type(incomingtype)
                 .valueOfIncome(incomingValue)
                 .timestamp(new Timestamp(System.currentTimeMillis()))
