@@ -1,6 +1,8 @@
 package com.example.housKeeping.converter;
 
 
+import java.util.Calendar;
+
 import org.springframework.core.convert.converter.Converter;
 
 import com.example.housKeeping.domain.SpendingItem;
@@ -14,6 +16,7 @@ public class SpendingItemDtoToSpendingItemConverter implements Converter<Spendin
                 .itemType(source.getItemType())
                 .valueOfItem(source.getValueOfItem())
                 .timestamp(source.getTimestamp())
+                .month(String.valueOf(Calendar.MONTH))
                 .build();
     }
 }

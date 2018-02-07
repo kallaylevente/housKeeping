@@ -21,6 +21,7 @@
                 <td th:text="${item.itemType}"></td>
                 <td th:text="${item.valueOfItem}"></td>
                 <td th:text="${item.timestamp}"></td>
+                <td><a th:href="@{'/housekeeping/delete/' + ${item.id}}">Remove this item</a></td>
             </tr>
         </table>
     </div>

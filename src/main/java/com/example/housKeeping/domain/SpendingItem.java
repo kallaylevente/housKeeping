@@ -22,6 +22,7 @@ public class SpendingItem {
     public String itemType;
     public Integer valueOfItem;
     public Timestamp timestamp;
+    public String month;
 
 
     @Tolerate

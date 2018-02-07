@@ -35,4 +35,5 @@ public class ItemHandlingImpl implements ItemHandling {
     public SpendingItem deleteItem(String houseKeepingItemId) {
         return null;
     }
+
 }

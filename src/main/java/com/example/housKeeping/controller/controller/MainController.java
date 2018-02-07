@@ -4,7 +4,9 @@ package com.example.housKeeping.controller.controller;
 import static java.util.Optional.ofNullable;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +50,7 @@ public class MainController {
     @RequestMapping("/housekeeping/sum")
     public String getSum(Model model) {
         model.addAttribute("income", ofNullable(incomesRepository.getSumOfIncomes()).orElse(0));
-        model.addAttribute("findall", spendingsRepository.sumOfValueByGroup("rezsi"));
+        model.addAttribute("findall", spendingsRepository.sumOfValueByGroup("rezsi", String.valueOf(Calendar.MONTH)));
         model.addAttribute("sum", databaseManagement.getSums());
         model.addAttribute("allsum", ofNullable(databaseManagement.getSumOfAll()).orElse(0));
         return "sum";
@@ -66,8 +68,6 @@ public class MainController {
                         .valueOfItem(Integer.valueOf(itemValue))
                         .build()
                 , SpendingItem.class));
-        List alist = new ArrayList();
-        alist.iterator();
         return "redirect:/housekeeping";
     }
 
@@ -75,7 +75,7 @@ public class MainController {
     public String addNewIncome(Model model,
                                @RequestParam("type") String incomingtype,
                                @RequestParam("value") Integer incomingValue) {
-        incomesRepository.save(converter.convert(IncomeItemDto.builder()
+        IncomeItem save = incomesRepository.save(converter.convert(IncomeItemDto.builder()
                 .type(incomingtype)
                 .valueOfIncome(incomingValue)
                 .timestamp(new Timestamp(System.currentTimeMillis()))
@@ -85,8 +85,14 @@ public class MainController {
 
     @RequestMapping(value = "/housekeeping/detailedSpendings/{group}", method = RequestMethod.GET)
     public String getDetailedSpendings(Model model, @PathVariable String group) {
-        model.addAttribute("list", spendingsRepository.findByItemGroup(group));
+        model.addAttribute("list", spendingsRepository.findByItemGroupAndMonth(group, String.valueOf(Calendar.MONTH)));
         return "detailed";
+    }
+
+    @RequestMapping(value = "housekeeping/delete/{id}")
+    public String deleteItem(@PathVariable String id) {
+        spendingsRepository.delete(Long.valueOf(id));
+        return "redirect:/housekeeping/sum";
     }
 
     @RequestMapping("")

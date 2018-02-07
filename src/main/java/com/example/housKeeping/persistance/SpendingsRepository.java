@@ -15,8 +15,9 @@ public interface SpendingsRepository extends JpaRepository<SpendingItem, Long> {
 
     SpendingItem findByItemType(String name);
 
-    List<SpendingItem> findByItemGroup(String group);
+    List<SpendingItem> findByItemGroupAndMonth(String group, String month);
 
-    @Query(value = "SELECT SUM(value_of_item) FROM spending_item WHERE item_group = ?1", nativeQuery = true)
-    Integer sumOfValueByGroup(String group);
+    @Query(value = "SELECT SUM(value_of_item) FROM spending_item WHERE item_group = ?1 AND month = ?2", nativeQuery = true)
+    Integer sumOfValueByGroup(String group, String month);
+
 }

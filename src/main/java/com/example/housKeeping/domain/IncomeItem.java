@@ -9,9 +9,11 @@ import javax.persistence.Id;
 
 
 import lombok.Builder;
+import lombok.Getter;
 
 @Entity
 @Builder
+@Getter
 public class IncomeItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,4 +21,6 @@ public class IncomeItem {
     private String type;
     private Integer valueOfIncome;
     private Timestamp timestamp;
+    public String month;
+
 }
