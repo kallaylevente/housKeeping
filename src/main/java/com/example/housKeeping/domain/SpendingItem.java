@@ -18,10 +18,10 @@ public class SpendingItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
 
-    private String itemGroup;
+    public String itemGroup;
     public String itemType;
     public Integer valueOfItem;
-    private Timestamp timestamp;
+    public Timestamp timestamp;
 
 
     @Tolerate

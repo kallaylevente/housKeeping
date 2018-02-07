@@ -15,10 +15,12 @@
             <tr >
                 <th>Type</th>
                 <th>Value</th>
+                <th>Date</th>
             </tr>
             <tr th:each="item : ${list}">
                 <td th:text="${item.itemType}"></td>
                 <td th:text="${item.valueOfItem}"></td>
+                <td th:text="${item.timestamp}"></td>
             </tr>
         </table>
     </div>
