@@ -4,10 +4,7 @@ package com.example.housKeeping.controller.controller;
 import static java.util.Optional.ofNullable;
 
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -40,13 +37,18 @@ public class MainController {
 
     private final ConversionService converter;
 
+    @RequestMapping("/login")
+    public String login(@RequestParam(required = false) String error) {
+        return "login";
+    }
 
-    @RequestMapping(value = {"/housekeeping", "*.ded"})
+    @RequestMapping(value = "/housekeeping")
     public String getIndexPage(Model model) {
         model.addAttribute("findall", spendingsRepository.findAll());
         return "index";
     }
-@Transactional
+
+    @Transactional
     @RequestMapping("/housekeeping/sum")
     public String getSum(Model model) {
         model.addAttribute("income", ofNullable(incomesRepository.getSumOfIncomes()).orElse(0));
