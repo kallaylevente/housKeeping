@@ -9,6 +9,8 @@ import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -43,9 +45,15 @@ public class MainController {
         return "login";
     }
 
+    @RequestMapping("/admin")
+    public String adminPage(Model model) {
+        return "admin";
+    }
+
     @RequestMapping(value = "/housekeeping")
     public String getIndexPage(Model model) {
         model.addAttribute("findall", spendingsRepository.findAll());
+        model.addAttribute("username", getCurrentUser());
         return "index";
     }
 
@@ -102,5 +110,9 @@ public class MainController {
     @RequestMapping("")
     public String healthCheck(Model model) {
         return "health";
+    }
+
+    public boolean getCurrentUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"));
     }
 }
