@@ -40,24 +40,13 @@ public class MainController {
 
     private final ConversionService converter;
 
-    @RequestMapping("/login")
-    public String login(@RequestParam(required = false) String error) {
-        return "login";
-    }
-
-    @RequestMapping("/admin")
-    public String adminPage(Model model) {
-        return "admin";
-    }
-
     @RequestMapping(value = "/housekeeping")
     public String getIndexPage(Model model) {
         model.addAttribute("findall", spendingsRepository.findAll());
-        model.addAttribute("username", getCurrentUser());
+        model.addAttribute("username", isUserAdmin());
         return "index";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     @RequestMapping("/housekeeping/sum")
     public String getSum(Model model) {
@@ -107,12 +96,7 @@ public class MainController {
         return "redirect:/housekeeping/sum";
     }
 
-    @RequestMapping("")
-    public String healthCheck(Model model) {
-        return "health";
-    }
-
-    public boolean getCurrentUser() {
+    public boolean isUserAdmin() {
         return SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"));
     }
 }

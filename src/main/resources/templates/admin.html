@@ -1,9 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
 </head>
 <body>
 <h1>THIS IS THE ADMIN PARTYY</h1>
+
+<form th:action="@{/admin/addUser}" method="post">
+    <p>Spending</p>
+    <select type="text" th:name="role" placeholder="role of the user" required="required">
+        <option value="ADMIN">ADMIN</option>
+        <option value="USER">USER</option>
+    </select>
+    <input type="text" th:name="username" placeholder="name of the user" required="required"> </input>
+    <input type="password" th:name="password" placeholder="password of the user" required="required"> </input>
+    <button type="submit">send</button>
+</form>
+
 </body>
 </html>
